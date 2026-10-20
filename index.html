@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tri Ân Bạn Nữ 20/10 - Món Quà Yêu Thương</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Mali:ital,wght@0,400;0,600;1,400&family=Nosifer&family=Roboto:wght@400;700&display=swap');
+
+        /* Font Trang trí 20/11 */
+        .font-cursive { font-family: 'Dancing Script', cursive; }
+        .font-cute { font-family: 'Mali', cursive; }
+        .font-horror { font-family: 'Nosifer', cursive; }
+
+        /* Animation Hoa rơi ngụy trang */
+        @keyframes floatFlower {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(105vh) rotate(360deg); opacity: 0.2; }
+        }
+
+        .flower-particle {
+            position: fixed;
+            top: -50px;
+            pointer-events: none;
+            animation: floatFlower linear infinite;
+            z-index: 10;
+        }
+
+        /* 
+        ==========================================================================
+        HIỆU ỨNG KINTH DỊ (STROBE LIGHT & SCREEN SHAKE)
+        ==========================================================================
+        */
+        @keyframes strobeLight {
+            0%, 100% { filter: brightness(3) contrast(2.5) invert(0); opacity: 1; }
+            15% { opacity: 0.05; filter: brightness(0.1); }
+            30% { opacity: 0.95; filter: brightness(2.5) sepia(1) hue-rotate(-50deg) saturate(8); }
+            45% { opacity: 0.1; }
+            60% { opacity: 1; filter: brightness(3.5) invert(0.9); }
+            75% { opacity: 0.2; }
+            90% { opacity: 1; filter: brightness(2); }
+        }
+
+        @keyframes extremeShake {
+            0% { transform: translate(0, 0) scale(1.15) rotate(0deg); }
+            10% { transform: translate(-30px, -25px) scale(1.4) rotate(-8deg); }
+            20% { transform: translate(30px, 20px) scale(1.45) rotate(9deg); }
+            30% { transform: translate(-35px, 25px) scale(1.3) rotate(-10deg); }
+            40% { transform: translate(35px, -20px) scale(1.5) rotate(7deg); }
+            50% { transform: translate(-20px, -35px) scale(1.35) rotate(-5deg); }
+            60% { transform: translate(30px, 30px) scale(1.55) rotate(10deg); }
+            70% { transform: translate(-25px, -15px) scale(1.25) rotate(-6deg); }
+            80% { transform: translate(20px, -25px) scale(1.45) rotate(5deg); }
+            90% { transform: translate(-15px, 25px) scale(1.4) rotate(-4deg); }
+            100% { transform: translate(0, 0) scale(1.15) rotate(0deg); }
+        }
+
+        @keyframes redWhiteFlash {
+            0%, 100% { background-color: #000000; }
+            20% { background-color: #8b0000; }
+            40% { background-color: #ffffff; }
+            60% { background-color: #ff0000; }
+            80% { background-color: #1a0000; }
+        }
+
+        .scare-strobe-active {
+            animation: strobeLight 0.07s infinite alternate, redWhiteFlash 0.12s infinite;
+        }
+
+        .scare-shake-active {
+            animation: extremeShake 0.05s infinite linear;
+        }
+
+        body {
+            user-select: none;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-pink-100 via-rose-50 to-amber-100 min-h-screen text-gray-800 font-cute flex flex-col justify-between relative">
+
+    <!-- Hoa rơi ngụy trang trang web 20/11 -->
+    <div id="flower-container"></div>
+
+    <!-- 
+    ==========================================================================
+    BỐI CẢNH 1: GIAO DIỆN CHÚC MƯỜNG 20/11 HOÀN HẢO (TRỤY TRANG)
+    ==========================================================================
+    -->
+    <div id="greeting-screen" class="container mx-auto max-w-2xl px-4 py-8 md:py-12 my-auto relative z-20 transition-opacity duration-300">
+        
+        <!-- Thiệp Mừng Chín Rồng / Tri Ân -->
+        <div class="bg-white/90 backdrop-blur-md rounded-3xl p-6 md:p-10 shadow-2xl border-4 border-rose-300 text-center relative overflow-hidden">
+            
+            <!-- Trang trí hoa ở góc thiệp -->
+            <div class="absolute -top-6 -left-6 text-5xl text-rose-400 opacity-80"><i class="fa-solid fa-seedling"></i></div>
+            <div class="absolute -top-6 -right-6 text-5xl text-rose-400 opacity-80"><i class="fa-solid fa-seedling"></i></div>
+
+            <div class="inline-block bg-rose-100 text-rose-600 font-semibold px-4 py-1.5 rounded-full text-xs md:text-sm mb-4 shadow-sm border border-rose-200">
+                <i class="fa-solid fa-heart mr-1.5 text-rose-500"></i> Tri Ân Ngày Phụ Nữ Việt Nam 20/11
+            </div>
+
+            <h1 class="font-cursive text-4xl md:text-6xl text-rose-600 mb-4 font-bold drop-shadow-sm">
+                Chào Mừng Ngày 20/10
+            </h1>
+
+            <p class="text-gray-600 text-sm md:text-base leading-relaxed mb-6 font-medium">
+                "Chúc bọn m đần thêm, ngu dốt, yếu đuối,..."
+            </p>
+
+            <!-- Khung Thơ Chúc Mừng -->
+            <div class="bg-rose-50/80 rounded-2xl p-4 md:p-6 border border-rose-200 text-xs md:text-sm text-rose-800 italic space-y-1.5 mb-8 shadow-inner">
+                <p>Mấy ai là người đi qua đò còn nhớ về bến cũ?</p>
+                <p>Mấy ai đi xa còn ngoảnh lại mái trường xưa?</p>
+                <p>Dù năm tháng vô tình trôi mãi mãi,</p>
+                <p>Mãi tri ân người khai sáng tương lai.</p>
+            </div>
+
+            <!-- NÚT BẪY KÍCH HOẠT JUMPSCARE -->
+            <button id="surprise-btn" 
+                    class="w-full bg-gradient-to-r from-rose-500 via-pink-500 to-rose-600 hover:from-rose-600 hover:to-pink-600 text-white text-lg md:text-xl font-bold py-4 px-8 rounded-2xl shadow-xl shadow-rose-300/50 hover:shadow-2xl transition duration-300 transform hover:scale-[1.03] active:scale-[0.97] flex items-center justify-center gap-3 cursor-pointer border-2 border-white">
+                <span class="animate-bounce"></span>
+                <span>Nhấn Vào Đây Để Xem Món Quà 20/11 Bất Ngờ</span>
+                <span class="animate-bounce"></span>
+            </button>
+
+            <p class="text-[11px] text-gray-400 mt-3">
+                <i class="fa-solid fa-volume-high mr-1"></i> Bật âm thanh để trải nghiệm trọn vẹn thiệp mừng âm nhạc
+            </p>
+        </div>
+
+    </div>
+
+
+    <!-- 
+    ==========================================================================
+    BỐI CẢNH 2: MÀN HÌNH DỌA MA JUMPSCARE (HIỂN THỊ KHI BẤM NÚT)
+    ==========================================================================
+    -->
+    <div id="jumpscare-screen" class="hidden fixed inset-0 z-50 bg-black flex items-center justify-center overflow-hidden select-none">
+        
+        <!-- Ảnh Dọa Ma Chớp Nháy & Rung Giật -->
+        <div id="scare-wrapper" class="w-full h-full flex items-center justify-center relative">
+            <img id="scare-image-element" src="" alt="Ghost Jumpscare" class="w-full h-full object-cover">
+            
+            <!-- Dòng chữ kinh dị nhấp nháy -->
+            <div class="absolute bottom-10 left-0 right-0 text-center pointer-events-none px-4 z-10">
+                <h2 class="font-horror text-4xl md:text-7xl text-red-600 tracking-wider drop-shadow-[0_5px_15px_rgba(0,0,0,1)]">
+                    M bị lừa rồi "NGU"
+                </h2>
+            </div>
+        </div>
+
+        <!-- Phím ẩn để thoát khi bị giật mình (Esc) -->
+        <button id="exit-btn" class="absolute top-4 right-4 bg-black/70 hover:bg-red-950 border border-red-800 text-gray-400 px-3 py-1.5 rounded-full text-xs transition z-50 cursor-pointer">
+            <i class="fa-solid fa-xmark mr-1"></i> (Esc)
+        </button>
+    </div>
+
+
+    <!-- 
+    ==========================================================================
+    MÃ NGUỒN JAVASCRIPT XỬ LÝ LOGIC & THAY ĐỔI LINK CỦA BẠN
+    ==========================================================================
+    -->
+    <script>
+        /*
+        =========================================================================
+        🔴 BẠN THAY ĐỔI LINK CỦA BẠN TRỰC TIẾP TẠI 2 DÒNG DƯỚI ĐÂY 🔴
+        =========================================================================
+        - CUSTOM_JUMPSCARE_IMAGE: Điền URL ảnh dọa ma hoặc tên file ảnh của bạn (VD: "ghost.jpg")
+        - CUSTOM_JUMPSCARE_AUDIO: Điền URL file âm thanh .mp3/.wav tiếng hét của bạn. 
+                                  (Nếu để trống "", web sẽ tự động phát tiếng hét tổng hợp cực to!)
+        */
+        
+        const CUSTOM_JUMPSCARE_IMAGE = "https://tintuc-divineshop.cdn.vccloud.vn/wp-content/uploads/2022/09/dong-phim-kinh-di-nhat-ban-ma-mi-am-anh-tu-nhung-net-van-hoa-tam-linh-truyen-thong_631ca814aef08.jpeg"; 
+        const CUSTOM_JUMPSCARE_AUDIO = "https://worthwhile-crimson-cfzpi9yc.edgeone.dev/"; 
+
+        // -----------------------------------------------------------------------
+        // Ảnh Ma Mặc Định SVG Kinh Dị (Chạy tự động khi bạn chưa điền link trên)
+        // -----------------------------------------------------------------------
+        const DEFAULT_SCARY_SVG = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23050000"/><path d="M50 10 C25 10 15 35 15 60 C15 80 25 90 35 90 C40 90 45 85 50 85 C55 85 60 90 65 90 C75 90 85 80 85 60 C85 35 75 10 50 10 Z" fill="%23e6e6e6"/><ellipse cx="35" cy="45" rx="8" ry="12" fill="%23000"/><ellipse cx="65" cy="45" rx="8" ry="12" fill="%23000"/><circle cx="37" cy="47" r="3" fill="%23ff0000"/><circle cx="67" cy="47" r="3" fill="%23ff0000"/><path d="M 30 70 Q 50 95 70 70 Q 50 78 30 70 Z" fill="%23000"/><path d="M 32 71 L 36 78 L 40 72 M 60 72 L 64 78 L 68 71" stroke="%23fff" stroke-width="1.5" fill="none"/></svg>`;
+
+        // Lấy các phần tử HTML
+        const greetingScreen = document.getElementById('greeting-screen');
+        const jumpscareScreen = document.getElementById('jumpscare-screen');
+        const surpriseBtn = document.getElementById('surprise-btn');
+        const scareImageElement = document.getElementById('scare-image-element');
+        const exitBtn = document.getElementById('exit-btn');
+        const flowerContainer = document.getElementById('flower-container');
+
+        let audioCtx = null;
+
+        // --- Tạo hiệu ứng hoa rơi ngụy trang trang trí 20/11 ---
+        function createFlowers() {
+            const icons = ['🌸', '🌺', '🌹', '✨', '💖', '🌼'];
+            for (let i = 0; i < 20; i++) {
+                const flower = document.createElement('div');
+                flower.className = 'flower-particle';
+                flower.innerText = icons[Math.floor(Math.random() * icons.length)];
+                flower.style.left = Math.random() * 100 + 'vw';
+                flower.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                flower.style.animationDelay = (Math.random() * 5) + 's';
+                flower.style.fontSize = (Math.random() * 12 + 16) + 'px';
+                flowerContainer.appendChild(flower);
+            }
+        }
+        createFlowers();
+
+        // --- Hệ thống Âm Thanh Kinh Dị Cực Đại ---
+        function playScaryAudio() {
+            // Nếu người dùng đã cài link âm thanh tùy chỉnh
+            if (CUSTOM_JUMPSCARE_AUDIO && CUSTOM_JUMPSCARE_AUDIO.trim() !== "") {
+                try {
+                    const audio = new Audio(CUSTOM_JUMPSCARE_AUDIO);
+                    audio.volume = 1.0;
+                    audio.play().catch(() => playSyntheticScream());
+                    return;
+                } catch(e) {
+                    console.log("Audio Error:", e);
+                }
+            }
+
+            // Nếu không có link, dùng Web Audio API tổng hợp tiếng hét kinh hãi cực lớn
+            playSyntheticScream();
+        }
+
+        // Web Audio API Synth tiếng hét
+        function playSyntheticScream() {
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+
+                const now = audioCtx.currentTime;
+
+                // Noise Generator (Tiếng xé tai)
+                const bufferSize = audioCtx.sampleRate * 2.5;
+                const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                const output = buffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) {
+                    output[i] = Math.random() * 2 - 1;
+                }
+
+                const whiteNoise = audioCtx.createBufferSource();
+                whiteNoise.buffer = buffer;
+
+                const filter = audioCtx.createBiquadFilter();
+                filter.type = 'highpass';
+                filter.frequency.setValueAtTime(800, now);
+
+                const noiseGain = audioCtx.createGain();
+                noiseGain.gain.setValueAtTime(1.5, now);
+                noiseGain.gain.exponentialRampToValueAtTime(0.01, now + 2.3);
+
+                whiteNoise.connect(filter);
+                filter.connect(noiseGain);
+                noiseGain.connect(audioCtx.destination);
+
+                // Các dải sóng ma quái hỗn loạn
+                const freqs = [600, 900, 1400, 2200, 3100];
+                freqs.forEach((freq, idx) => {
+                    const osc = audioCtx.createOscillator();
+                    const oscGain = audioCtx.createGain();
+
+                    osc.type = idx % 2 === 0 ? 'sawtooth' : 'square';
+                    osc.frequency.setValueAtTime(freq, now);
+                    osc.frequency.exponentialRampToValueAtTime(freq * 1.8, now + 0.3);
+                    osc.frequency.exponentialRampToValueAtTime(freq * 0.3, now + 2.2);
+
+                    oscGain.gain.setValueAtTime(0.5, now);
+                    oscGain.gain.exponentialRampToValueAtTime(0.001, now + 2.3);
+
+                    osc.connect(oscGain);
+                    oscGain.connect(audioCtx.destination);
+
+                    osc.start(now);
+                    osc.stop(now + 2.3);
+                });
+
+                whiteNoise.start(now);
+                whiteNoise.stop(now + 2.3);
+            } catch (e) {
+                console.error("Audio API error:", e);
+            }
+        }
+
+        // --- Bật Fullscreen ---
+        function requestFullScreen() {
+            const docElm = document.documentElement;
+            if (docElm.requestFullscreen) docElm.requestFullscreen().catch(() => {});
+            else if (docElm.webkitRequestFullScreen) docElm.webkitRequestFullScreen().catch(() => {});
+            else if (docElm.msRequestFullscreen) docElm.msRequestFullscreen().catch(() => {});
+        }
+
+        function exitFullScreen() {
+            if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
+        }
+
+        // --- KÍCH HOẠT JUMPSCARE BẤY ---
+        surpriseBtn.addEventListener('click', () => {
+            // Mở Toàn màn hình
+            requestFullScreen();
+
+            // Gán ảnh dọa ma (Tự chọn hoặc Mặc định)
+            if (CUSTOM_JUMPSCARE_IMAGE && CUSTOM_JUMPSCARE_IMAGE.trim() !== "") {
+                scareImageElement.src = CUSTOM_JUMPSCARE_IMAGE;
+            } else {
+                scareImageElement.src = DEFAULT_SCARY_SVG;
+            }
+
+            // Phát tiếng hét
+            playScaryAudio();
+
+            // Rung máy điện thoại
+            if ("vibrate" in navigator) {
+                navigator.vibrate([400, 100, 400, 100, 600]);
+            }
+
+            // Chuyển màn hình & Kích hoạt hiệu ứng chớp nháy
+            greetingScreen.classList.add('hidden');
+            flowerContainer.classList.add('hidden');
+            jumpscareScreen.classList.remove('hidden');
+
+            jumpscareScreen.classList.add('scare-strobe-active');
+            scareImageElement.classList.add('scare-shake-active');
+        });
+
+        // --- Nút thoát & Phím Esc ---
+        function resetApp() {
+            jumpscareScreen.classList.add('hidden');
+            jumpscareScreen.classList.remove('scare-strobe-active');
+            scareImageElement.classList.remove('scare-shake-active');
+
+            greetingScreen.classList.remove('hidden');
+            flowerContainer.classList.remove('hidden');
+            exitFullScreen();
+        }
+
+        exitBtn.addEventListener('click', resetApp);
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') resetApp();
+        });
+    </script>
+</body>
+</html>
